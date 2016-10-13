@@ -1,0 +1,7 @@
+class Hanoi {
+  run() {
+    // until second or third tower is complete
+    // get move from player
+    // move peg
+  }
+}
