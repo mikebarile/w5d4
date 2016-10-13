@@ -64,8 +64,8 @@ class Game {
   }
 
   run() {
-    console.log(`won? ${this.isWon}`);
-    while (!this.isWon) {
+    console.log(`won? ${this.isWon()}`);
+    while (!this.isWon()) {
       this.promptMove(this.move);
     }
     console.log(`Congratulations!`);
