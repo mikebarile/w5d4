@@ -63,18 +63,23 @@ class Game {
     }
   }
 
-  run() {
-    console.log(`won? ${this.isWon()}`);
-    while (!this.isWon()) {
-      this.promptMove(this.move);
+  run(completionCallback) {
+    if (this.isWon()){
+      console.log(`Congratulations!`);
+      completionCallback();
+      return;
     }
-    console.log(`Congratulations!`);
+    this.promptMove( (startTowerIdx, endTowerIdx) => {
+      if (!this.move(startTowerIdx, endTowerIdx)) {
+        console.log("Invalid move!");
+      }
+      this.run(completionCallback);
+    });
   }
-
 }
 
 let game = new Game();
-game.run();
+game.run(() => reader.close());
 
 // console.log(game.move(0, 1));
 // console.log(game.stacks);
