@@ -1,19 +1,15 @@
-const readline = require('readline');
-const reader = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
 class Game {
 
-  constructor() {
+  constructor(reader, callback) {
+    this.reader = reader;
     this.stacks = [[3,2,1],[],[]];
+    this.run(callback);
   }
 
   promptMove(callback) {
     console.log(this.stacks);
-    reader.question(`From which stack? `, function (stackOne) {
-      reader.question(`Where to? `, function (stackTwo) {
+    this.reader.question(`From which stack? `, (stackOne) => {
+      this.reader.question(`Where to? `, function (stackTwo) {
         const startTowerIdx = parseInt(stackOne);
         const endTowerIdx = parseInt(stackTwo);
 
@@ -78,15 +74,4 @@ class Game {
   }
 }
 
-let game = new Game();
-game.run(() => reader.close());
-
-// console.log(game.move(0, 1));
-// console.log(game.stacks);
-// console.log(game.move(1, 0));
-// console.log(game.stacks);
-// console.log(game.move(2, 0));
-// console.log(game.stacks);
-
-// console.log(game.isValidMove(0, 1)); // should work
-// console.log(game.isValidMove(1, 0)); // shouldn't work
+module.exports = Game;
